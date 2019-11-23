@@ -1,26 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class Search extends React.Component {
+  render () {
+    return (
+      <div className="App">
+        <header className="Bite">
+          <h1>Bite Search</h1>
+          <form>
+            <label>
+              Zipcode: 
+              <input type="text" name="zipcode"></input>
+            </label>
+            <input type="submit" value="Submit"></input>
+          </form>
+        </header>
+      </div>
+    );
+  }
 }
 
-export default App;
+class Results extends React.Component {
+  render() {
+    return (
+      <div className="App">
+        <h1>Results</h1>
+      </div>
+    )
+  }
+}
+
+export { Search, Results };
