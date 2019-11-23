@@ -2,11 +2,17 @@ import React from 'react';
 import './App.css';
 
 class Search extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      zipcode: ''
+    }
+  }
   render () {
     return (
       <div className="App">
         <header className="Bite">
-          <h1>Bite Search</h1>
+          <h1>Search</h1>
           <form>
             <label>
               Zipcode: 
@@ -20,14 +26,4 @@ class Search extends React.Component {
   }
 }
 
-class Results extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <h1>Results</h1>
-      </div>
-    )
-  }
-}
-
-export { Search, Results };
+export default Search;

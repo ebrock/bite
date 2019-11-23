@@ -25,3 +25,4 @@ yarn-error.log*
 create_README.md
 .vscode
 .eslintrc.js
+config.json
