@@ -34,49 +34,32 @@ class App extends React.Component {
   };
 
   handleGeoSubmit = event => {
-    let coords = {};
     event.preventDefault();
+    let context = this;
     let options = {
       timeout: 5000,
       maximumAge: 0
     };
 
     function success(position) {
-      coords = position.coords;
+      let coords = position.coords;
 
       console.log(coords);
       console.log("Your current position is: ");
       console.log(`Latitude: ${coords.latitude}`);
       console.log(`Longitude: ${coords.longitude}`);
       console.log(`More or less ${coords.accuracy} meters.`);
+
+      context.setState({
+        coords: coords
+      });
     }
 
     function error(err) {
       console.warn(`ERROR: ${err.code}: ${err.message}`);
     }
 
-    navigator.geolocation.getCurrentPosition(
-      (success = position => {
-        let coords = {};
-        event.preventDefault();
-        let options = {
-          timeout: 5000,
-          maximumAge: 0
-        };
-
-        coords = position.coords;
-
-        console.log(coords);
-        console.log("Your current position is: ");
-        console.log(`Latitude: ${coords.latitude}`);
-        console.log(`Longitude: ${coords.longitude}`);
-        console.log(`More or less ${coords.accuracy} meters.`);
-
-        this.setState({ coords });
-      }),
-      error,
-      options
-    );
+    navigator.geolocation.getCurrentPosition(success, error, options);
   };
 
   render() {
