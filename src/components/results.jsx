@@ -16,6 +16,8 @@ class Results extends React.Component {
           <span>
             Accurate by more or less {this.props.coords.accuracy} meters.
           </span>
+          <br />
+          <span>City id: {this.props.cityId}</span>
         </p>
       </div>
     );

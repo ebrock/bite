@@ -11,7 +11,8 @@ class App extends React.Component {
     this.state = {
       input: "",
       zipcode: "",
-      coords: {}
+      coords: {},
+      cityId: ""
     };
   }
 
@@ -53,6 +54,22 @@ class App extends React.Component {
       context.setState({
         coords: coords
       });
+
+      fetch(
+        `https://developers.zomato.com/api/v2.1/geocode?lat=${coords.latitude}&lon=${coords.longitude}`,
+        {
+          headers: {
+            "Content-Type": "text/json",
+            "user-key": process.env.REACT_APP_ZOMATO_API_KEY
+          }
+        }
+      )
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          context.setState({ cityId: data.location.city_id });
+        })
+        .catch(error => console.warn(error));
     }
 
     function error(err) {
@@ -71,7 +88,11 @@ class App extends React.Component {
           onSubmit={this.handleSubmit}
           onGeoSubmit={this.handleGeoSubmit}
         />
-        <Results zipcode={this.state.zipcode} coords={this.state.coords} />
+        <Results
+          zipcode={this.state.zipcode}
+          coords={this.state.coords}
+          cityId={this.state.cityId}
+        />
       </div>
     );
   }

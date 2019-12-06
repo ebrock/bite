@@ -26,3 +26,6 @@ create_README.md
 .vscode
 .eslintrc.js
 config.json
+
+# api keys
+.env
