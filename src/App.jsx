@@ -12,7 +12,8 @@ class App extends React.Component {
       input: "",
       zipcode: "",
       coords: {},
-      cityId: ""
+      cityId: "",
+      cuisines: []
     };
   }
 
@@ -68,6 +69,24 @@ class App extends React.Component {
         .then(data => {
           console.log(data);
           context.setState({ cityId: data.location.city_id });
+          fetch(
+            `https://developers.zomato.com/api/v2.1/cuisines?city_id=${data.location.city_id}`,
+            {
+              headers: {
+                "Content-Type": "text/json",
+                "user-key": process.env.REACT_APP_ZOMATO_API_KEY
+              }
+            }
+          )
+            .then(res => res.json())
+            .then(data => {
+              console.log(data);
+              let cuisines = data.cuisines.map(d => {
+                return d.cuisine.cuisine_name;
+              });
+              console.log(cuisines);
+              context.setState({ cuisines });
+            });
         })
         .catch(error => console.warn(error));
     }
@@ -92,6 +111,7 @@ class App extends React.Component {
           zipcode={this.state.zipcode}
           coords={this.state.coords}
           cityId={this.state.cityId}
+          cuisines={this.state.cuisines}
         />
       </div>
     );
