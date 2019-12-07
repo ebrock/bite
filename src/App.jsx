@@ -31,8 +31,22 @@ class App extends React.Component {
       {
         city: this.state.input
       },
-      () => console.log(this.state.city)
+      // () => console.log(this.state.city)
+      () => {
+        this.getCities(this.state.city);
+      }
     );
+  };
+
+  getCities = city => {
+    fetch(`https://developers.zomato.com/api/v2.1/cities?q=${city}`, {
+      headers: {
+        "Content-Type": "text/json",
+        "user-key": process.env.REACT_APP_ZOMATO_API_KEY
+      }
+    })
+      .then(res => res.json())
+      .then(data => console.log(data));
   };
 
   handleGeoSubmit = event => {
