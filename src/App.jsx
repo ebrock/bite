@@ -10,7 +10,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       input: "",
-      zipcode: "",
+      city: "",
       coords: {},
       cityId: "",
       cuisines: []
@@ -29,9 +29,9 @@ class App extends React.Component {
     console.log("Submit clicked!");
     this.setState(
       {
-        zipcode: this.state.input
+        city: this.state.input
       },
-      () => console.log(this.state.zipcode)
+      () => console.log(this.state.city)
     );
   };
 
@@ -108,7 +108,7 @@ class App extends React.Component {
           onGeoSubmit={this.handleGeoSubmit}
         />
         <Results
-          zipcode={this.state.zipcode}
+          city={this.state.city}
           coords={this.state.coords}
           cityId={this.state.cityId}
           cuisines={this.state.cuisines}
