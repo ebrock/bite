@@ -2,10 +2,45 @@ import React from "react";
 
 class Results extends React.Component {
   state = {
-    cuisines: []
+    cityResults: [],
+    suggestions: []
   };
 
+  shouldComponentUpdate(nextProps) {
+    return this.props.cityResults !== nextProps.cityResults;
+  }
+
+  // componentWillReceiveProps(nextProps) {
+  //   console.log("will receive props!");
+  //   if (this.props.cityResults !== nextProps.cityResults) {
+  //     let suggestions = nextProps.cityResults.location_suggestions;
+  //     this.setState({ suggestions });
+  //   }
+  // }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log("derived state!");
+    if (props.cityResults !== state.cityResults) {
+      let suggestions = props.cityResults.location_suggestions;
+      console.log("returning dervied state", suggestions);
+      return { suggestions };
+    }
+    return null;
+  }
+
+  componentWillUpdate(nextProps) {
+    console.log("will update!", nextProps);
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log("did update!", prevProps);
+  }
+
   render() {
+    let list;
+    if (this.state.suggestions) {
+      list = this.state.suggestions.map(c => <li>{c.name}</li>);
+    }
     return (
       <div className="container">
         <div>
@@ -15,29 +50,8 @@ class Results extends React.Component {
           <div className="col">
             <h2>City</h2>
             <p>{this.props.city}</p>
-          </div>
-          <div className="col">
-            <h2>Geolocation</h2>
-            <p>
-              <span>Longitude: {this.props.coords.longitude}</span>
-              <br />
-              <span>Latitude: {this.props.coords.latitude}</span>
-              <br />
-              <span>
-                Accurate by more or less {this.props.coords.accuracy} meters.
-              </span>
-              <br />
-              <span>City id: {this.props.cityId}</span>
-              <br />
-            </p>
-            <span>
-              Cuisines nearby:{" "}
-              <ul>
-                {this.props.cuisines.map(c => (
-                  <li>{c}</li>
-                ))}
-              </ul>
-            </span>
+            <h4>Location Suggestions:</h4>
+            <ul>{list}</ul>
           </div>
         </div>
       </div>

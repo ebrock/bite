@@ -28,12 +28,6 @@ class Search extends React.Component {
               </button>
             </form>
           </div>
-          <div className="col">
-            <h2>Get Geolocation</h2>
-            <form onSubmit={this.props.onGeoSubmit}>
-              <button className="btn btn-secondary">Submit geolocation</button>
-            </form>
-          </div>
         </div>
       </div>
     );
