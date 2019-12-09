@@ -19,10 +19,8 @@ class Results extends React.Component {
   // }
 
   static getDerivedStateFromProps(props, state) {
-    console.log("derived state!");
     if (props.cityResults !== state.cityResults) {
       let suggestions = props.cityResults.location_suggestions;
-      console.log("returning dervied state", suggestions);
       return { suggestions };
     }
     return null;
@@ -39,7 +37,7 @@ class Results extends React.Component {
   render() {
     let list;
     if (this.state.suggestions) {
-      list = this.state.suggestions.map(c => <li>{c.name}</li>);
+      list = this.state.suggestions.map(c => <li key={c.id}>{c.name}</li>);
     }
     return (
       <div className="container">
