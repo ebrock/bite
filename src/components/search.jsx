@@ -7,7 +7,6 @@ class Search extends React.Component {
         <h1 className="border">Search</h1>
         <div className="row">
           <div className="col">
-            <h1>By city</h1>
             <form onSubmit={this.props.onSubmit}>
               <input
                 type="text"

@@ -32,7 +32,6 @@ class App extends React.Component {
       {
         city: this.state.input
       },
-      // () => console.log(this.state.city)
       () => {
         this.getCities(this.state.city);
       }
@@ -55,21 +54,23 @@ class App extends React.Component {
       });
   };
 
+  handleCityClick = city => {
+    console.log("city click!");
+    console.log(city.name);
+  };
+
   render() {
     return (
       <div>
         <NavBar />
-        <Search
-          onChange={this.handleChange}
-          onSubmit={this.handleSubmit}
-          onGeoSubmit={this.handleGeoSubmit}
-        />
+        <Search onChange={this.handleChange} onSubmit={this.handleSubmit} />
         <Results
           city={this.state.city}
           coords={this.state.coords}
           cityId={this.state.cityId}
           cuisines={this.state.cuisines}
           cityResults={this.state.cityResults}
+          handleCityClick={this.handleCityClick}
         />
       </div>
     );

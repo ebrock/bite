@@ -26,18 +26,27 @@ class Results extends React.Component {
     return null;
   }
 
-  componentWillUpdate(nextProps) {
-    console.log("will update!", nextProps);
-  }
-
   componentDidUpdate(prevProps) {
     console.log("did update!", prevProps);
   }
 
   render() {
+    let title;
+    let city;
     let list;
+    console.log("handleCityClick true?", this.props.handleCityClick);
     if (this.state.suggestions) {
-      list = this.state.suggestions.map(c => <li key={c.id}>{c.name}</li>);
+      list = this.state.suggestions.map(c => (
+        <button
+          className="list-group-item list-group-item-action"
+          key={c.id}
+          onClick={e => this.props.handleCityClick(c, e)}
+        >
+          {c.name}
+        </button>
+      ));
+      title = "Location Suggestions";
+      city = "City";
     }
     return (
       <div className="container">
@@ -46,9 +55,9 @@ class Results extends React.Component {
         </div>
         <div className="row">
           <div className="col">
-            <h2>City</h2>
+            <h2>{city}</h2>
             <p>{this.props.city}</p>
-            <h4>Location Suggestions:</h4>
+            <h4>{title}</h4>
             <ul>{list}</ul>
           </div>
         </div>
