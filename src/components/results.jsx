@@ -2,26 +2,23 @@ import React from "react";
 
 class Results extends React.Component {
   state = {
-    cityResults: [],
-    suggestions: []
+    suggestedLocations: [],
+    listOfRestaurants: []
   };
 
   shouldComponentUpdate(nextProps) {
-    return this.props.cityResults !== nextProps.cityResults;
+    return this.props.suggestedLocations !== nextProps.suggestedLocations;
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   console.log("will receive props!");
-  //   if (this.props.cityResults !== nextProps.cityResults) {
-  //     let suggestions = nextProps.cityResults.location_suggestions;
-  //     this.setState({ suggestions });
-  //   }
-  // }
-
   static getDerivedStateFromProps(props, state) {
-    if (props.cityResults !== state.cityResults) {
-      let suggestions = props.cityResults.location_suggestions;
-      return { suggestions };
+    if (props.suggestedLocations !== state.suggestedLocations) {
+      let suggestions = props.suggestedLocations.location_suggestions;
+      // return { suggestions };
+      return { suggestedLocations: suggestions };
+    } else if (props.listOfRestaurants !== state.listOfRestaurants) {
+      console.log("hello!");
+      let restaurants = props.listOfRestaurants;
+      return { restaurants };
     }
     return null;
   }
@@ -34,9 +31,8 @@ class Results extends React.Component {
     let title;
     let city;
     let list;
-    console.log("handleCityClick true?", this.props.handleCityClick);
-    if (this.state.suggestions) {
-      list = this.state.suggestions.map(c => (
+    if (this.state.suggestedLocations) {
+      list = this.state.suggestedLocations.map(c => (
         <button
           className="list-group-item list-group-item-action"
           key={c.id}
@@ -47,6 +43,10 @@ class Results extends React.Component {
       ));
       title = "Location Suggestions";
       city = "City";
+    } else if (this.state.listOfRestaurants) {
+      list = this.state.listOfRestaurants.map(r => (
+        <li>{r.restaurant.name}</li>
+      ));
     }
     return (
       <div className="container">
