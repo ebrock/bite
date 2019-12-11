@@ -16,18 +16,18 @@ class Results extends React.Component {
     );
   }
 
-  static getDerivedStateFromProps(props, state) {
-    if (props.suggestedLocations !== state.suggestedLocations) {
-      let suggestions = props.suggestedLocations;
-      return { suggestedLocations: suggestions };
-    }
-    if (props.listOfRestaurants !== state.listOfRestaurants) {
-      console.log("derived list of restaurants...");
-      let restaurants = props.listOfRestaurants;
-      return { listOfRestaurants: restaurants };
-    }
-    return null;
-  }
+  // static getDerivedStateFromProps(props, state) {
+  //   if (props.suggestedLocations !== state.suggestedLocations) {
+  //     let suggestions = props.suggestedLocations;
+  //     return { suggestedLocations: suggestions };
+  //   }
+  //   if (props.listOfRestaurants !== state.listOfRestaurants) {
+  //     console.log("derived list of restaurants...");
+  //     let restaurants = props.listOfRestaurants;
+  //     return { listOfRestaurants: restaurants };
+  //   }
+  //   return null;
+  // }
 
   componentDidUpdate(prevProps) {
     console.log("did update!", prevProps);
@@ -35,12 +35,11 @@ class Results extends React.Component {
 
   render() {
     let title;
-    let city;
     let list;
 
-    if (this.state.suggestedLocations) {
+    if (this.props.suggestedLocations) {
       console.log("ben affleck");
-      list = this.state.suggestedLocations.location_suggestions.map(c => (
+      list = this.props.suggestedLocations.location_suggestions.map(c => (
         <button
           className="list-group-item list-group-item-action"
           key={c.id}
@@ -52,10 +51,10 @@ class Results extends React.Component {
 
       title = "Location Suggestions";
     }
-    if (this.state.listOfRestaurants) {
+    if (this.props.listOfRestaurants) {
       console.log("obiwan kenobi");
-      console.log("list of restaurants", this.state.listOfRestaurants);
-      list = this.state.listOfRestaurants.restaurants.map(r => (
+      console.log("list of restaurants", this.props.listOfRestaurants);
+      list = this.props.listOfRestaurants.restaurants.map(r => (
         <li className="list-group-item">{r.restaurant.name}</li>
       ));
       title = "5 restaurants";
