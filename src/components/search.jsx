@@ -25,6 +25,9 @@ class Search extends React.Component {
               >
                 Submit
               </button>
+              <button className="btn btn-danger" onClick={this.props.onReset}>
+                Reset
+              </button>
             </form>
           </div>
         </div>

@@ -1,13 +1,19 @@
 import React from "react";
 
 class Results extends React.Component {
-  state = {
-    suggestedLocations: undefined,
-    listOfRestaurants: undefined
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      suggestedLocations: undefined,
+      listOfRestaurants: undefined
+    };
+  }
 
   shouldComponentUpdate(nextProps) {
-    return this.props.suggestedLocations !== nextProps.suggestedLocations;
+    return (
+      this.props.suggestedLocations !== nextProps.suggestedLocations ||
+      this.props.listOfRestaurants !== nextProps.listOfRestaurants
+    );
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -45,15 +51,14 @@ class Results extends React.Component {
       ));
 
       title = "Location Suggestions";
-      city = "City";
-    } else if (this.state.listOfRestaurants) {
-      console.log(
-        "obiwan kenobi",
-        this.state.listOfRestaurants.map(r => r.restaurant.name)
-      );
-      list = this.state.listOfRestaurants.map(r => (
-        <li>{r.restaurant.name}</li>
+    }
+    if (this.state.listOfRestaurants) {
+      console.log("obiwan kenobi");
+      console.log("list of restaurants", this.state.listOfRestaurants);
+      list = this.state.listOfRestaurants.restaurants.map(r => (
+        <li className="list-group-item">{r.restaurant.name}</li>
       ));
+      title = "5 restaurants";
     }
     return (
       <div className="container">
@@ -62,7 +67,6 @@ class Results extends React.Component {
         </div>
         <div className="row">
           <div className="col">
-            <h2>{city}</h2>
             <p>{this.props.city}</p>
             <h4>{title}</h4>
             <ul>{list}</ul>

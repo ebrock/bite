@@ -4,7 +4,6 @@ import NavBar from "./components/navbar";
 import Search from "./components/search";
 import Results from "./components/results";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { restElement } from "@babel/types";
 
 class App extends React.Component {
   constructor(props) {
@@ -37,6 +36,18 @@ class App extends React.Component {
         this.getCities(this.state.city);
       }
     );
+  };
+
+  handleReset = event => {
+    event.preventDefault();
+    console.log("Reset clicked!");
+    this.setState({
+      city: "",
+      cuisines: [],
+      suggestedLocations: undefined,
+      selectedCity: undefined,
+      listOfRestaurants: undefined
+    });
   };
 
   getCities = city => {
@@ -86,7 +97,11 @@ class App extends React.Component {
     return (
       <div>
         <NavBar />
-        <Search onChange={this.handleChange} onSubmit={this.handleSubmit} />
+        <Search
+          onChange={this.handleChange}
+          onSubmit={this.handleSubmit}
+          onReset={this.handleReset}
+        />
         <Results
           city={this.state.city}
           coords={this.state.coords}
