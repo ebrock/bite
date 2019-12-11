@@ -2,8 +2,8 @@ import React from "react";
 
 class Results extends React.Component {
   state = {
-    suggestedLocations: [],
-    listOfRestaurants: []
+    suggestedLocations: undefined,
+    listOfRestaurants: undefined
   };
 
   shouldComponentUpdate(nextProps) {
@@ -12,13 +12,13 @@ class Results extends React.Component {
 
   static getDerivedStateFromProps(props, state) {
     if (props.suggestedLocations !== state.suggestedLocations) {
-      let suggestions = props.suggestedLocations.location_suggestions;
-      // return { suggestions };
+      let suggestions = props.suggestedLocations;
       return { suggestedLocations: suggestions };
-    } else if (props.listOfRestaurants !== state.listOfRestaurants) {
-      console.log("hello!");
+    }
+    if (props.listOfRestaurants !== state.listOfRestaurants) {
+      console.log("derived list of restaurants...");
       let restaurants = props.listOfRestaurants;
-      return { restaurants };
+      return { listOfRestaurants: restaurants };
     }
     return null;
   }
@@ -31,8 +31,10 @@ class Results extends React.Component {
     let title;
     let city;
     let list;
+
     if (this.state.suggestedLocations) {
-      list = this.state.suggestedLocations.map(c => (
+      console.log("ben affleck");
+      list = this.state.suggestedLocations.location_suggestions.map(c => (
         <button
           className="list-group-item list-group-item-action"
           key={c.id}
@@ -41,9 +43,14 @@ class Results extends React.Component {
           {c.name}
         </button>
       ));
+
       title = "Location Suggestions";
       city = "City";
     } else if (this.state.listOfRestaurants) {
+      console.log(
+        "obiwan kenobi",
+        this.state.listOfRestaurants.map(r => r.restaurant.name)
+      );
       list = this.state.listOfRestaurants.map(r => (
         <li>{r.restaurant.name}</li>
       ));

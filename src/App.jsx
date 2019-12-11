@@ -13,9 +13,9 @@ class App extends React.Component {
       input: "",
       city: "",
       cuisines: [],
-      suggestedLocations: [],
-      selectedCity: [],
-      listOfRestaurants: []
+      suggestedLocations: undefined,
+      selectedCity: undefined,
+      listOfRestaurants: undefined
     };
   }
 
@@ -56,7 +56,7 @@ class App extends React.Component {
   };
 
   getRestaurantDetails = cityId => {
-    console.log("getEstablishments!");
+    console.log("getRestaurantDetails!");
     fetch(
       `https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&entity_type=city&count=5`,
       {
@@ -75,7 +75,7 @@ class App extends React.Component {
 
   handleCityClick = (city, event) => {
     event.preventDefault();
-    console.log("city click!");
+    console.log("handleCityClick!");
     console.log(`city: ${city.name}, id: ${city.id}`);
     this.setState({ selectedCity: city }, () =>
       this.getRestaurantDetails(city.id)
