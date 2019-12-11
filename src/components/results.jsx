@@ -16,19 +16,6 @@ class Results extends React.Component {
     );
   }
 
-  // static getDerivedStateFromProps(props, state) {
-  //   if (props.suggestedLocations !== state.suggestedLocations) {
-  //     let suggestions = props.suggestedLocations;
-  //     return { suggestedLocations: suggestions };
-  //   }
-  //   if (props.listOfRestaurants !== state.listOfRestaurants) {
-  //     console.log("derived list of restaurants...");
-  //     let restaurants = props.listOfRestaurants;
-  //     return { listOfRestaurants: restaurants };
-  //   }
-  //   return null;
-  // }
-
   componentDidUpdate(prevProps) {
     console.log("did update!", prevProps);
   }

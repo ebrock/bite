@@ -104,9 +104,6 @@ class App extends React.Component {
         />
         <Results
           city={this.state.city}
-          coords={this.state.coords}
-          cityId={this.state.cityId}
-          cuisines={this.state.cuisines}
           suggestedLocations={this.state.suggestedLocations}
           listOfRestaurants={this.state.listOfRestaurants}
           handleCityClick={this.handleCityClick}
