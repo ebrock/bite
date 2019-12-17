@@ -5,7 +5,7 @@ class Search extends React.Component {
     return (
       <div className="container">
         <h1 className="border">Search</h1>
-        <div className="row">
+        <div id="city-search" className="row">
           <div className="col">
             <form onSubmit={this.props.onSubmit}>
               <input
@@ -30,6 +30,9 @@ class Search extends React.Component {
               </button>
             </form>
           </div>
+        </div>
+        <div id="cuisine-selection">
+          <h2 className="border">Cuisines</h2>
         </div>
       </div>
     );

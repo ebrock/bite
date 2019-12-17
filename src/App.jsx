@@ -11,13 +11,14 @@ class App extends React.Component {
     this.state = {
       input: "",
       city: "",
-      cuisines: [],
+      cuisineIds: [],
       suggestedLocations: undefined,
       selectedCity: undefined,
       listOfRestaurants: undefined
     };
   }
 
+  //  Handles the City search text change from user input.
   handleChange = event => {
     event.preventDefault();
     this.setState({
@@ -25,6 +26,7 @@ class App extends React.Component {
     });
   };
 
+  //  Handles the City search submit button and sets state.
   handleSubmit = event => {
     event.preventDefault();
     console.log("Submit clicked!");
@@ -33,25 +35,28 @@ class App extends React.Component {
         city: this.state.input
       },
       () => {
+        //  Returns list of suggested locations.
         this.getCities(this.state.city);
       }
     );
   };
 
+  //  Resets state to default values.
   handleReset = event => {
     event.preventDefault();
     console.log("Reset clicked!");
     this.setState({
       city: "",
-      cuisines: [],
+      cuisineIds: [],
       suggestedLocations: undefined,
       selectedCity: undefined,
       listOfRestaurants: undefined
     });
   };
 
-  getCities = city => {
-    fetch(`https://developers.zomato.com/api/v2.1/cities?q=${city}`, {
+  //  Requires enteredCity query. Returns list of suggested locations.
+  getCities = enteredCity => {
+    fetch(`https://developers.zomato.com/api/v2.1/cities?q=${enteredCity}`, {
       headers: {
         "Content-Type": "text/json",
         "user-key": process.env.REACT_APP_ZOMATO_API_KEY
@@ -66,6 +71,7 @@ class App extends React.Component {
       });
   };
 
+  //  Requires cityId. Returns list of restaurants.
   getRestaurantDetails = cityId => {
     console.log("getRestaurantDetails!");
     fetch(
@@ -84,11 +90,13 @@ class App extends React.Component {
       });
   };
 
+  //  Handles the return of restaurants when the user clicks a city.
   handleCityClick = (city, event) => {
     event.preventDefault();
     console.log("handleCityClick!");
     console.log(`city: ${city.name}, id: ${city.id}`);
     this.setState({ selectedCity: city }, () =>
+      //  Returns a list of restaurants.
       this.getRestaurantDetails(city.id)
     );
   };
