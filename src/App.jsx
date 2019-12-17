@@ -11,7 +11,7 @@ class App extends React.Component {
     this.state = {
       input: "",
       city: "",
-      cuisineIds: [],
+      cuisineData: undefined,
       suggestedLocations: undefined,
       selectedCity: undefined,
       listOfRestaurants: undefined
@@ -47,7 +47,7 @@ class App extends React.Component {
     console.log("Reset clicked!");
     this.setState({
       city: "",
-      cuisineIds: [],
+      cuisineData: undefined,
       suggestedLocations: undefined,
       selectedCity: undefined,
       listOfRestaurants: undefined
@@ -90,15 +90,32 @@ class App extends React.Component {
       });
   };
 
+  getCuisinesOfCity = cityId => {
+    console.log("getCuisinesOfCity() called!");
+    fetch(`https://developers.zomato.com/api/v2.1/cuisines?city_id=${cityId}`, {
+      headers: {
+        "Content-Type": "text/json",
+        "user-key": process.env.REACT_APP_ZOMATO_API_KEY
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        this.setState({ cuisineData: data });
+      });
+  };
+
   //  Handles the return of restaurants when the user clicks a city.
   handleCityClick = (city, event) => {
     event.preventDefault();
     console.log("handleCityClick!");
     console.log(`city: ${city.name}, id: ${city.id}`);
-    this.setState({ selectedCity: city }, () =>
+    this.setState({ selectedCity: city }, () => {
       //  Returns a list of restaurants.
-      this.getRestaurantDetails(city.id)
-    );
+      // this.getRestaurantDetails(city.id)
+      console.log("getRestaurantDetails() commented out here.");
+      this.getCuisinesOfCity(city.id);
+    });
   };
 
   render() {
@@ -109,6 +126,7 @@ class App extends React.Component {
           onChange={this.handleChange}
           onSubmit={this.handleSubmit}
           onReset={this.handleReset}
+          cuisineData={this.state.cuisineData}
         />
         <Results
           city={this.state.city}
