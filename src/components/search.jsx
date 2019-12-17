@@ -5,7 +5,13 @@ class Search extends React.Component {
     let cuisines;
     if (this.props.cuisineData) {
       cuisines = this.props.cuisineData.cuisines.map(c => (
-        <button className="btn btn-outline-primary btn-sm m-1">
+        <button
+          key={c.cuisine.cuisine_id}
+          id={c.cuisine.cuisine_id}
+          className="btn btn-outline-primary btn-sm m-1"
+          isactive="false"
+          onClick={this.props.onCuisineButtonClick}
+        >
           {c.cuisine.cuisine_name}
         </button>
       ));

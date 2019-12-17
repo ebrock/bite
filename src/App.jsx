@@ -12,6 +12,7 @@ class App extends React.Component {
       input: "",
       city: "",
       cuisineData: undefined,
+      cuisineIds: [],
       suggestedLocations: undefined,
       selectedCity: undefined,
       listOfRestaurants: undefined
@@ -118,6 +119,32 @@ class App extends React.Component {
     });
   };
 
+  //  Handles cuisine button selection.
+  handleCuisineButtonClick = event => {
+    event.preventDefault();
+    let cuisineIds = [...this.state.cuisineIds];
+
+    if (event.target.getAttribute("isactive") === "false") {
+      event.target.setAttribute("isactive", "true");
+      event.target.classList.add("active");
+      cuisineIds.push(event.target.getAttribute("id"));
+      this.setState({ cuisineIds }, () => {
+        console.log(this.state.cuisineIds);
+      });
+    } else {
+      event.target.setAttribute("isactive", "false");
+      event.target.classList.remove("active");
+      if (cuisineIds.includes(event.target.getAttribute("id"))) {
+        cuisineIds = cuisineIds.filter(
+          id => id !== event.target.getAttribute("id")
+        );
+        this.setState({ cuisineIds }, () => {
+          console.log(this.state.cuisineIds);
+        });
+      }
+    }
+  };
+
   render() {
     return (
       <div>
@@ -126,6 +153,7 @@ class App extends React.Component {
           onChange={this.handleChange}
           onSubmit={this.handleSubmit}
           onReset={this.handleReset}
+          onCuisineButtonClick={this.handleCuisineButtonClick}
           cuisineData={this.state.cuisineData}
         />
         <Results
