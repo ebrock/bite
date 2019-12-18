@@ -42,7 +42,9 @@ class Results extends React.Component {
       console.log("obiwan kenobi");
       console.log("list of restaurants", this.props.listOfRestaurants);
       list = this.props.listOfRestaurants.restaurants.map(r => (
-        <li className="list-group-item">{r.restaurant.name}</li>
+        <li className="list-group-item">
+          {r.restaurant.name} - <i>{r.restaurant.cuisines}</i>
+        </li>
       ));
       title = "Restaurants";
     }
@@ -53,7 +55,7 @@ class Results extends React.Component {
         </div>
         <div className="row">
           <div className="col">
-            <p>{this.props.city}</p>
+            <p>{this.props.userInput}</p>
             <h4>{title}</h4>
             <ul>{list}</ul>
           </div>

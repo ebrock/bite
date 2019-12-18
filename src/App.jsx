@@ -11,7 +11,7 @@ class App extends React.Component {
     // TODO: change selectedCity to citySelectedFromSuggested
     this.state = {
       input: "",
-      city: "",
+      userInput: "",
       cuisineData: undefined,
       cuisineIds: [],
       suggestedLocations: undefined,
@@ -34,11 +34,11 @@ class App extends React.Component {
     console.log("Submit clicked!");
     this.setState(
       {
-        city: this.state.input
+        userInput: this.state.input
       },
       () => {
         //  Returns list of suggested locations.
-        this.getCities(this.state.city);
+        this.getCities(this.state.userInput);
       }
     );
   };
@@ -48,7 +48,7 @@ class App extends React.Component {
     event.preventDefault();
     console.log("Reset clicked!");
     this.setState({
-      city: "",
+      userInput: "",
       cuisineData: undefined,
       suggestedLocations: undefined,
       selectedCity: undefined,
@@ -77,7 +77,7 @@ class App extends React.Component {
   getRestaurantDetails = () => {
     console.log("getRestaurantDetails!");
     fetch(
-      `https://developers.zomato.com/api/v2.1/search?entity_id=${this.state.selectedCity.id}&entity_type=city&count=10&radius=2500&cuisines=${this.state.cuisineIds}
+      `https://developers.zomato.com/api/v2.1/search?entity_id=${this.state.selectedCity.id}&entity_type=city&count=10&radius=25&cuisines=${this.state.cuisineIds}
       `,
       {
         headers: {
@@ -161,7 +161,7 @@ class App extends React.Component {
           getRestaurantDetails={this.getRestaurantDetails}
         />
         <Results
-          city={this.state.city}
+          city={this.state.userInput}
           suggestedLocations={this.state.suggestedLocations}
           listOfRestaurants={this.state.listOfRestaurants}
           handleCityClick={this.handleCityClick}
