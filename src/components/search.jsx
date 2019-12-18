@@ -3,6 +3,7 @@ import React from "react";
 class Search extends React.Component {
   render() {
     let cuisines;
+    let buttons;
     if (this.props.cuisineData) {
       cuisines = this.props.cuisineData.cuisines.map(c => (
         <button
@@ -15,6 +16,15 @@ class Search extends React.Component {
           {c.cuisine.cuisine_name}
         </button>
       ));
+
+      buttons = (
+        <button
+          className="btn btn-secondary btn-block m-1"
+          onClick={this.props.getRestaurantDetails}
+        >
+          Next
+        </button>
+      );
     }
 
     return (
@@ -49,6 +59,7 @@ class Search extends React.Component {
         <div id="cuisine-selection">
           <h2 className="border">Cuisines</h2>
           {cuisines}
+          {buttons}
         </div>
       </div>
     );

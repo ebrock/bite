@@ -44,7 +44,7 @@ class Results extends React.Component {
       list = this.props.listOfRestaurants.restaurants.map(r => (
         <li className="list-group-item">{r.restaurant.name}</li>
       ));
-      title = "5 restaurants";
+      title = "Restaurants";
     }
     return (
       <div className="container">

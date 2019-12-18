@@ -8,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 class App extends React.Component {
   constructor(props) {
     super(props);
+    // TODO: change selectedCity to citySelectedFromSuggested
     this.state = {
       input: "",
       city: "",
@@ -72,11 +73,12 @@ class App extends React.Component {
       });
   };
 
-  //  Requires cityId. Returns list of restaurants.
-  getRestaurantDetails = cityId => {
+  //  Requires cityId and cuisineIds. Returns restaurants object array.
+  getRestaurantDetails = () => {
     console.log("getRestaurantDetails!");
     fetch(
-      `https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&entity_type=city&count=5`,
+      `https://developers.zomato.com/api/v2.1/search?entity_id=${this.state.selectedCity.id}&entity_type=city&count=10&radius=2500&cuisines=${this.state.cuisineIds}
+      `,
       {
         headers: {
           "Content-Type": "text/json",
@@ -86,11 +88,12 @@ class App extends React.Component {
     )
       .then(res => res.json())
       .then(data => {
-        console.log(data.restaurants.map(r => r.restaurant.name));
+        console.log(data);
         this.setState({ listOfRestaurants: data });
       });
   };
 
+  //  Requires cityId. Returns cuisines object.
   getCuisinesOfCity = cityId => {
     console.log("getCuisinesOfCity() called!");
     fetch(`https://developers.zomato.com/api/v2.1/cuisines?city_id=${cityId}`, {
@@ -155,6 +158,7 @@ class App extends React.Component {
           onReset={this.handleReset}
           onCuisineButtonClick={this.handleCuisineButtonClick}
           cuisineData={this.state.cuisineData}
+          getRestaurantDetails={this.getRestaurantDetails}
         />
         <Results
           city={this.state.city}
