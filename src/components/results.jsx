@@ -1,4 +1,5 @@
 import React from "react";
+import Popover from "./popover";
 
 class Results extends React.Component {
   constructor(props) {
