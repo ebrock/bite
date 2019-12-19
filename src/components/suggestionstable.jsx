@@ -7,7 +7,7 @@ import Accordion from "react-bootstrap/Accordion";
 class SuggestionsTable extends React.Component {
   render() {
     //  Initialize the list of suggested locations.
-    let list = this.props.suggestedLocations.location_suggestions.map(c => (
+    let list = this.props.locationsData.location_suggestions.map(c => (
       <Button
         className="list-group-item list-group-item-action"
         key={c.id}

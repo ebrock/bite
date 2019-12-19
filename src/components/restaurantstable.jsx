@@ -7,7 +7,7 @@ import Col from "react-bootstrap/Col";
 class RestaurantTable extends React.Component {
   render() {
     //  Initialize list of Cards for Accordion.
-    let list = this.props.listOfRestaurants.restaurants.map(r => (
+    let list = this.props.restaurantsData.restaurants.map(r => (
       <Card key={r.restaurant.id}>
         <Accordion.Toggle as={Card.Header} eventKey={r.restaurant.id}>
           {r.restaurant.name} - <i>{r.restaurant.cuisines}</i>

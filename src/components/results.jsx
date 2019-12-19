@@ -6,16 +6,13 @@ import Container from "react-bootstrap/Container";
 class Results extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      suggestedLocations: undefined,
-      listOfRestaurants: undefined
-    };
+    this.state = {};
   }
 
   shouldComponentUpdate(nextProps) {
     return (
-      this.props.suggestedLocations !== nextProps.suggestedLocations ||
-      this.props.listOfRestaurants !== nextProps.listOfRestaurants
+      this.props.locationsData !== nextProps.locationsData ||
+      this.props.restaurantsData !== nextProps.restaurantsData
     );
   }
 
@@ -25,32 +22,27 @@ class Results extends React.Component {
 
   render() {
     //  Declare variables.
-    let title;
     let display;
 
     //  If user clicks a suggested location, then provide the list of restaurants.
-    if (this.props.suggestedLocations) {
+    if (this.props.locationsData && !this.props.cuisineData) {
       display = (
         <SuggestionsTable
-          suggestedLocations={this.props.suggestedLocations}
+          locationsData={this.props.locationsData}
           handleCityClick={this.props.handleCityClick}
         />
       );
     }
-    if (this.props.listOfRestaurants) {
+    if (this.props.restaurantsData) {
       display = (
-        <RestaurantTable listOfRestaurants={this.props.listOfRestaurants} />
+        <RestaurantTable restaurantsData={this.props.restaurantsData} />
       );
     }
+    if (this.props.locationsData && this.props.cuisineData) {
+      display = "";
+    }
 
-    return (
-      <Container>
-        <div>
-          <h1 className="border">Results</h1>
-        </div>
-        {display}
-      </Container>
-    );
+    return <Container>{display}</Container>;
   }
 }
 

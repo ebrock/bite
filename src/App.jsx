@@ -8,15 +8,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    // TODO: change selectedCity to citySelectedFromSuggested
     this.state = {
       input: "",
       userInput: "",
-      cuisineData: undefined,
-      cuisineIds: [],
-      suggestedLocations: undefined,
+      locationsData: undefined,
       selectedCity: undefined,
-      listOfRestaurants: undefined
+      cuisineData: undefined,
+      restaurantsData: undefined,
+      cuisineIds: []
     };
   }
 
@@ -51,9 +50,9 @@ class App extends React.Component {
       userInput: "",
       cuisineData: undefined,
       cuisineIds: [],
-      suggestedLocations: undefined,
+      locationsData: undefined,
       selectedCity: undefined,
-      listOfRestaurants: undefined
+      restaurantsData: undefined
     });
   };
 
@@ -68,8 +67,8 @@ class App extends React.Component {
       .then(res => res.json())
       .then(data => {
         console.log(data.location_suggestions.map(c => c.name));
-        this.setState({ suggestedLocations: data }, () =>
-          console.log("state suggestedLocations", this.state.suggestedLocations)
+        this.setState({ locationsData: data }, () =>
+          console.log("state locationsData", this.state.locationsData)
         );
       });
   };
@@ -90,7 +89,7 @@ class App extends React.Component {
       .then(res => res.json())
       .then(data => {
         console.log(data);
-        this.setState({ listOfRestaurants: data });
+        this.setState({ restaurantsData: data });
       });
   };
 
@@ -163,8 +162,9 @@ class App extends React.Component {
         />
         <Results
           city={this.state.userInput}
-          suggestedLocations={this.state.suggestedLocations}
-          listOfRestaurants={this.state.listOfRestaurants}
+          cuisineData={this.props.cuisineData}
+          locationsData={this.state.locationsData}
+          restaurantsData={this.state.restaurantsData}
           handleCityClick={this.handleCityClick}
         />
       </div>
