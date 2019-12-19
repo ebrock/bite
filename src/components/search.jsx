@@ -3,9 +3,13 @@ import Button from "react-bootstrap/Button";
 
 class Search extends React.Component {
   render() {
+    //  Declared variables.
     let cuisines;
     let buttons;
+
+    //  If the getCuisinesOfCity is successful, then initialize the cuisines button.
     if (this.props.cuisineData) {
+      //  Initialize the buttons.
       cuisines = this.props.cuisineData.cuisines.map(c => (
         <Button
           key={c.cuisine.cuisine_id}
@@ -19,6 +23,7 @@ class Search extends React.Component {
         </Button>
       ));
 
+      // Initialize the "Next" button.
       buttons = (
         <Button
           className="m-1"
@@ -65,6 +70,7 @@ class Search extends React.Component {
             </form>
           </div>
         </div>
+        {/* Div for cuisine. Controlled by the conditional logic outside of 'return'. */}
         <div id="cuisine-selection">
           <h2 className="border">Cuisines</h2>
           {cuisines}
