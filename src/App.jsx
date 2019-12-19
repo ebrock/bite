@@ -50,6 +50,7 @@ class App extends React.Component {
     this.setState({
       userInput: "",
       cuisineData: undefined,
+      cuisineIds: [],
       suggestedLocations: undefined,
       selectedCity: undefined,
       listOfRestaurants: undefined
