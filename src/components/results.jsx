@@ -3,8 +3,8 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import Popover from "react-bootstrap/Popover";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Accordion from "react-bootstrap/Accordion";
+import Card from "react-bootstrap/Card";
 
 class Results extends React.Component {
   constructor(props) {
@@ -30,16 +30,6 @@ class Results extends React.Component {
     let title;
     let list;
 
-    const popover = (
-      <Popover id="popover-basic">
-        <Popover.Title as="h3">Popover right</Popover.Title>
-        <Popover.Content>
-          And here's some <strong>amazing</strong> content. It's very engaging.
-          right?
-        </Popover.Content>
-      </Popover>
-    );
-
     if (this.props.suggestedLocations) {
       console.log("ben affleck");
       list = this.props.suggestedLocations.location_suggestions.map(c => (
@@ -54,15 +44,25 @@ class Results extends React.Component {
 
       title = "Location Suggestions";
     }
+
     if (this.props.listOfRestaurants) {
       console.log("obiwan kenobi");
       console.log("list of restaurants", this.props.listOfRestaurants);
       list = this.props.listOfRestaurants.restaurants.map(r => (
-        <OverlayTrigger trigger="click" placement="right" overlay={popover}>
-          <li className="list-group-item">
-            {r.restaurant.name} - <i>{r.restaurant.cuisines}</i>
-          </li>
-        </OverlayTrigger>
+        <Card key={r.restaurant.id}>
+          <Card.Header>
+            <Accordion.Toggle
+              as={Button}
+              variant="link"
+              eventKey={r.restaurant.id}
+            >
+              {r.restaurant.name} - <i>{r.restaurant.cuisines}</i>
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey={r.restaurant.id}>
+            <Card.Body>{r.restaurant.location.address}</Card.Body>
+          </Accordion.Collapse>
+        </Card>
       ));
       title = "Restaurants";
     }
@@ -75,7 +75,7 @@ class Results extends React.Component {
           <Col>
             <p>{this.props.userInput}</p>
             <h4>{title}</h4>
-            <ul>{list}</ul>
+            <Accordion>{list}</Accordion>
           </Col>
         </Row>
       </Container>
