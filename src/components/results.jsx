@@ -27,11 +27,17 @@ class Results extends React.Component {
   }
 
   render() {
+    //  Declare variables.
     let title;
     let list;
 
+    //  If userInput is submitted, then provide a list of locations.
     if (this.props.suggestedLocations) {
-      console.log("ben affleck");
+      console.log(
+        "this.props.suggestedLocations!",
+        this.props.suggestedLocations
+      );
+      //  Initialize the list of suggested locations.
       list = this.props.suggestedLocations.location_suggestions.map(c => (
         <Button
           className="list-group-item list-group-item-action"
@@ -42,28 +48,30 @@ class Results extends React.Component {
         </Button>
       ));
 
+      //  Set the title.
       title = "Location Suggestions";
     }
 
+    //  If user clicks a suggested location, then provide the list of restaurants.
     if (this.props.listOfRestaurants) {
-      console.log("obiwan kenobi");
-      console.log("list of restaurants", this.props.listOfRestaurants);
+      console.log(
+        "this.props.listOfRestaurants!",
+        this.props.listOfRestaurants
+      );
+
+      //  Initialize list of Cards for Accordion.
       list = this.props.listOfRestaurants.restaurants.map(r => (
         <Card key={r.restaurant.id}>
-          <Card.Header>
-            <Accordion.Toggle
-              as={Button}
-              variant="link"
-              eventKey={r.restaurant.id}
-            >
-              {r.restaurant.name} - <i>{r.restaurant.cuisines}</i>
-            </Accordion.Toggle>
-          </Card.Header>
+          <Accordion.Toggle as={Card.Header} eventKey={r.restaurant.id}>
+            {r.restaurant.name} - <i>{r.restaurant.cuisines}</i>
+          </Accordion.Toggle>
           <Accordion.Collapse eventKey={r.restaurant.id}>
             <Card.Body>{r.restaurant.location.address}</Card.Body>
           </Accordion.Collapse>
         </Card>
       ));
+
+      //  Set the title. Previously null or "Location Suggestions".
       title = "Restaurants";
     }
     return (
