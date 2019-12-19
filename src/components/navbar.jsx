@@ -1,11 +1,12 @@
 import React from "react";
+import Navbar from "react-bootstrap/Navbar";
 
 class NavBar extends React.Component {
   render() {
     return (
-      <nav className="navbar navbar-light bg-light">
-        <span className="navbar-brand mb-0 h1">Bite</span>
-      </nav>
+      <Navbar bg="light">
+        <Navbar.Brand className="mb-0 h1">Bite</Navbar.Brand>
+      </Navbar>
     );
   }
 }

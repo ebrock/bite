@@ -1,5 +1,10 @@
 import React from "react";
-import Popover from "./popover";
+import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Accordion from "react-bootstrap/Accordion";
+import Card from "react-bootstrap/Card";
 
 class Results extends React.Component {
   constructor(props) {
@@ -28,40 +33,52 @@ class Results extends React.Component {
     if (this.props.suggestedLocations) {
       console.log("ben affleck");
       list = this.props.suggestedLocations.location_suggestions.map(c => (
-        <button
+        <Button
           className="list-group-item list-group-item-action"
           key={c.id}
           onClick={e => this.props.handleCityClick(c, e)}
         >
           {c.name}
-        </button>
+        </Button>
       ));
 
       title = "Location Suggestions";
     }
+
     if (this.props.listOfRestaurants) {
       console.log("obiwan kenobi");
       console.log("list of restaurants", this.props.listOfRestaurants);
       list = this.props.listOfRestaurants.restaurants.map(r => (
-        <li className="list-group-item">
-          {r.restaurant.name} - <i>{r.restaurant.cuisines}</i>
-        </li>
+        <Card key={r.restaurant.id}>
+          <Card.Header>
+            <Accordion.Toggle
+              as={Button}
+              variant="link"
+              eventKey={r.restaurant.id}
+            >
+              {r.restaurant.name} - <i>{r.restaurant.cuisines}</i>
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey={r.restaurant.id}>
+            <Card.Body>{r.restaurant.location.address}</Card.Body>
+          </Accordion.Collapse>
+        </Card>
       ));
       title = "Restaurants";
     }
     return (
-      <div className="container">
+      <Container>
         <div>
           <h1 className="border">Results</h1>
         </div>
-        <div className="row">
-          <div className="col">
+        <Row>
+          <Col>
             <p>{this.props.userInput}</p>
             <h4>{title}</h4>
-            <ul>{list}</ul>
-          </div>
-        </div>
-      </div>
+            <Accordion>{list}</Accordion>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

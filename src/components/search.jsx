@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "react-bootstrap/Button";
 
 class Search extends React.Component {
   render() {
@@ -6,24 +7,27 @@ class Search extends React.Component {
     let buttons;
     if (this.props.cuisineData) {
       cuisines = this.props.cuisineData.cuisines.map(c => (
-        <button
+        <Button
           key={c.cuisine.cuisine_id}
           id={c.cuisine.cuisine_id}
-          className="btn btn-outline-primary btn-sm m-1"
+          className="m-1"
+          variant="light"
           isactive="false"
           onClick={this.props.onCuisineButtonClick}
         >
           {c.cuisine.cuisine_name}
-        </button>
+        </Button>
       ));
 
       buttons = (
-        <button
-          className="btn btn-secondary btn-block m-1"
+        <Button
+          className="m-1"
+          variant="secondary"
           onClick={this.props.getRestaurantDetails}
+          block
         >
           Next
-        </button>
+        </Button>
       );
     }
 
@@ -43,16 +47,21 @@ class Search extends React.Component {
                 onChange={this.props.onChange}
                 required
               ></input>
-              <button
-                className="btn btn-primary m-2"
+              <Button
+                className="m-1"
+                variant="primary"
                 type="submit"
                 city="Submit"
               >
                 Submit
-              </button>
-              <button className="btn btn-danger" onClick={this.props.onReset}>
+              </Button>
+              <Button
+                className="m-1"
+                variant="danger"
+                onClick={this.props.onReset}
+              >
                 Reset
-              </button>
+              </Button>
             </form>
           </div>
         </div>
