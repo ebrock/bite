@@ -51,6 +51,7 @@ class App extends React.Component {
   handleReset = event => {
     event.preventDefault();
     console.log("Reset clicked!");
+    this.key = "0";
     this.setState({
       userInput: "",
       cuisineData: undefined,
@@ -154,10 +155,20 @@ class App extends React.Component {
   };
 
   render() {
+    let key = "0";
+
+    if (this.state.restaurantsData) {
+      key = "3";
+    } else if (this.state.cuisineData) {
+      key = "2";
+    } else if (this.state.locationsData) {
+      key = "1";
+    }
+
     return (
       <div>
         <NavBar />
-        <Accordion defaultActiveKey="0">
+        <Accordion defaultActiveKey="0" activeKey={key}>
           <Card>
             <Accordion.Toggle as={Button} variant="link" eventKey="0">
               <Card.Header>Search</Card.Header>
@@ -204,6 +215,9 @@ class App extends React.Component {
             </Accordion.Collapse>
           </Card>
         </Accordion>
+        <Button className="m-1" variant="danger" onClick={this.handleReset}>
+          Reset
+        </Button>
       </div>
     );
   }
