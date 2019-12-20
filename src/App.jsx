@@ -2,21 +2,25 @@ import React from "react";
 import "./index.css";
 import NavBar from "./components/navbar";
 import Search from "./components/search";
-import Results from "./components/results";
+import Cuisines from "./components/cuisines";
+import SuggestionsTable from "./components/suggestionstable";
+import RestaurantsTable from "./components/restaurantstable";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Accordion from "react-bootstrap/Accordion";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    // TODO: change selectedCity to citySelectedFromSuggested
     this.state = {
       input: "",
       userInput: "",
-      cuisineData: undefined,
-      cuisineIds: [],
-      suggestedLocations: undefined,
+      locationsData: undefined,
       selectedCity: undefined,
-      listOfRestaurants: undefined
+      cuisineData: undefined,
+      restaurantsData: undefined,
+      cuisineIds: []
     };
   }
 
@@ -47,13 +51,14 @@ class App extends React.Component {
   handleReset = event => {
     event.preventDefault();
     console.log("Reset clicked!");
+    this.key = "0";
     this.setState({
       userInput: "",
       cuisineData: undefined,
       cuisineIds: [],
-      suggestedLocations: undefined,
+      locationsData: undefined,
       selectedCity: undefined,
-      listOfRestaurants: undefined
+      restaurantsData: undefined
     });
   };
 
@@ -68,8 +73,8 @@ class App extends React.Component {
       .then(res => res.json())
       .then(data => {
         console.log(data.location_suggestions.map(c => c.name));
-        this.setState({ suggestedLocations: data }, () =>
-          console.log("state suggestedLocations", this.state.suggestedLocations)
+        this.setState({ locationsData: data }, () =>
+          console.log("state locationsData", this.state.locationsData)
         );
       });
   };
@@ -90,7 +95,7 @@ class App extends React.Component {
       .then(res => res.json())
       .then(data => {
         console.log(data);
-        this.setState({ listOfRestaurants: data });
+        this.setState({ restaurantsData: data });
       });
   };
 
@@ -150,23 +155,69 @@ class App extends React.Component {
   };
 
   render() {
+    let key = "0";
+
+    if (this.state.restaurantsData) {
+      key = "3";
+    } else if (this.state.cuisineData) {
+      key = "2";
+    } else if (this.state.locationsData) {
+      key = "1";
+    }
+
     return (
       <div>
         <NavBar />
-        <Search
-          onChange={this.handleChange}
-          onSubmit={this.handleSubmit}
-          onReset={this.handleReset}
-          onCuisineButtonClick={this.handleCuisineButtonClick}
-          cuisineData={this.state.cuisineData}
-          getRestaurantDetails={this.getRestaurantDetails}
-        />
-        <Results
-          city={this.state.userInput}
-          suggestedLocations={this.state.suggestedLocations}
-          listOfRestaurants={this.state.listOfRestaurants}
-          handleCityClick={this.handleCityClick}
-        />
+        <Accordion defaultActiveKey="0" activeKey={key}>
+          <Card>
+            <Accordion.Toggle as={Button} variant="link" eventKey="0">
+              <Card.Header>Search</Card.Header>
+            </Accordion.Toggle>
+            <Accordion.Collapse eventKey="0">
+              <Search
+                onChange={this.handleChange}
+                onSubmit={this.handleSubmit}
+                onReset={this.handleReset}
+                getRestaurantDetails={this.getRestaurantDetails}
+              />
+            </Accordion.Collapse>
+          </Card>
+          <Card>
+            <Accordion.Toggle as={Button} variant="link" eventKey="1">
+              <Card.Header>Suggested Locations</Card.Header>
+            </Accordion.Toggle>
+            <Accordion.Collapse eventKey="1">
+              <SuggestionsTable
+                locationsData={this.state.locationsData}
+                handleCityClick={this.handleCityClick}
+              />
+            </Accordion.Collapse>
+          </Card>
+          <Card>
+            <Accordion.Toggle as={Button} variant="link" eventKey="2">
+              <Card.Header>Cuisines</Card.Header>
+            </Accordion.Toggle>
+            <Accordion.Collapse eventKey="2">
+              <Cuisines
+                selectedCity={this.state.selectedCity}
+                cuisineData={this.state.cuisineData}
+                onCuisineButtonClick={this.handleCuisineButtonClick}
+                onNextClick={this.getRestaurantDetails}
+              />
+            </Accordion.Collapse>
+          </Card>
+          <Card>
+            <Accordion.Toggle as={Button} variant="link" eventKey="3">
+              <Card.Header>Restaurants</Card.Header>
+            </Accordion.Toggle>
+            <Accordion.Collapse eventKey="3">
+              <RestaurantsTable restaurantsData={this.state.restaurantsData} />
+            </Accordion.Collapse>
+          </Card>
+        </Accordion>
+        <Button className="m-1" variant="danger" onClick={this.handleReset}>
+          Reset
+        </Button>
       </div>
     );
   }
