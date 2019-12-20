@@ -26,7 +26,7 @@ class Cuisines extends React.Component {
         <Button
           className="m-1"
           variant="secondary"
-          onClick={this.props.getRestaurantDetails}
+          onClick={this.props.onNextClick}
           block
         >
           Next

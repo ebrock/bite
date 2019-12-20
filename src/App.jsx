@@ -167,7 +167,8 @@ class App extends React.Component {
         <Cuisines
           selectedCity={this.state.selectedCity}
           cuisineData={this.state.cuisineData}
-          onCuisineButtonClick={this.onCuisineButtonClick}
+          onCuisineButtonClick={this.handleCuisineButtonClick}
+          onNextClick={this.getRestaurantDetails}
         />
         <RestaurantsTable restaurantsData={this.state.restaurantsData} />
       </div>
