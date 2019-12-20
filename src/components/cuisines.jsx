@@ -35,8 +35,6 @@ class Cuisines extends React.Component {
     }
     return (
       <div>
-        {/* Div for cuisine. Controlled by the conditional logic outside of 'return'. */}
-        <h2 className="border">Cuisines in.</h2>
         {cuisines}
         {buttons}
       </div>

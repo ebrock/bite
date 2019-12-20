@@ -25,7 +25,6 @@ class RestaurantsTable extends React.Component {
     return (
       <Row>
         <Col>
-          <h4>Restaurants</h4>
           <Accordion>{restaurants}</Accordion>
         </Col>
       </Row>

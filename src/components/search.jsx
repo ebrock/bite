@@ -5,7 +5,6 @@ class Search extends React.Component {
   render() {
     return (
       <div className="container">
-        <h1 className="border">Search</h1>
         <div id="city-search" className="row">
           <div className="col">
             <form onSubmit={this.props.onSubmit}>

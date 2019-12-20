@@ -24,7 +24,6 @@ class SuggestionsTable extends React.Component {
       <div>
         <Row>
           <Col>
-            <h4>Suggested Locations</h4>
             <Accordion>{suggestions}</Accordion>
           </Col>
         </Row>
