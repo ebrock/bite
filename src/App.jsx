@@ -2,7 +2,9 @@ import React from "react";
 import "./index.css";
 import NavBar from "./components/navbar";
 import Search from "./components/search";
-import Results from "./components/results";
+import Cuisines from "./components/cuisines";
+import SuggestionsTable from "./components/suggestionstable";
+import RestaurantsTable from "./components/restaurantstable";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 class App extends React.Component {
@@ -156,17 +158,18 @@ class App extends React.Component {
           onChange={this.handleChange}
           onSubmit={this.handleSubmit}
           onReset={this.handleReset}
-          onCuisineButtonClick={this.handleCuisineButtonClick}
-          cuisineData={this.state.cuisineData}
           getRestaurantDetails={this.getRestaurantDetails}
         />
-        <Results
-          city={this.state.userInput}
-          cuisineData={this.props.cuisineData}
+        <SuggestionsTable
           locationsData={this.state.locationsData}
-          restaurantsData={this.state.restaurantsData}
           handleCityClick={this.handleCityClick}
         />
+        <Cuisines
+          selectedCity={this.state.selectedCity}
+          cuisineData={this.state.cuisineData}
+          onCuisineButtonClick={this.onCuisineButtonClick}
+        />
+        <RestaurantsTable restaurantsData={this.state.restaurantsData} />
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React from "react";
 import SuggestionsTable from "./suggestionstable";
-import RestaurantTable from "./restaurantstable";
+import RestaurantsTable from "./restaurantstable";
 import Container from "react-bootstrap/Container";
 
 class Results extends React.Component {
@@ -12,7 +12,8 @@ class Results extends React.Component {
   shouldComponentUpdate(nextProps) {
     return (
       this.props.locationsData !== nextProps.locationsData ||
-      this.props.restaurantsData !== nextProps.restaurantsData
+      this.props.restaurantsData !== nextProps.restaurantsData ||
+      this.props.cuisineData !== nextProps.cuisineData
     );
   }
 
@@ -21,26 +22,9 @@ class Results extends React.Component {
   }
 
   render() {
-    //  Declare variables.
-    let display;
-
-    //  If user clicks a suggested location, then provide the list of restaurants.
-    if (this.props.locationsData && !this.props.cuisineData) {
-      display = (
-        <SuggestionsTable
-          locationsData={this.props.locationsData}
-          handleCityClick={this.props.handleCityClick}
-        />
-      );
-    }
-    if (this.props.restaurantsData) {
-      display = (
-        <RestaurantTable restaurantsData={this.props.restaurantsData} />
-      );
-    }
-    if (this.props.locationsData && this.props.cuisineData) {
-      display = "";
-    }
+    let display = (
+      <RestaurantsTable restaurantsData={this.props.restaurantsData} />
+    );
 
     return <Container>{display}</Container>;
   }

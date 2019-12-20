@@ -70,7 +70,6 @@ class Search extends React.Component {
             </form>
           </div>
         </div>
-        {/* Div for cuisine. Controlled by the conditional logic outside of 'return'. */}
         <div id="cuisine-selection">
           <h2 className="border">Cuisines in (city goes here).</h2>
           {cuisines}
