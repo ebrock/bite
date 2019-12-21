@@ -9,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
 
 class App extends React.Component {
   constructor(props) {
@@ -167,57 +168,57 @@ class App extends React.Component {
 
     return (
       <div>
-        <NavBar />
-        <Accordion defaultActiveKey="0" activeKey={key}>
-          <Card>
-            <Accordion.Toggle as={Button} variant="link" eventKey="0">
-              <Card.Header>Search</Card.Header>
-            </Accordion.Toggle>
-            <Accordion.Collapse eventKey="0">
-              <Search
-                onChange={this.handleChange}
-                onSubmit={this.handleSubmit}
-                onReset={this.handleReset}
-                getRestaurantDetails={this.props.getRestaurantDetails}
-              />
-            </Accordion.Collapse>
-          </Card>
-          <Card>
-            <Accordion.Toggle as={Button} variant="link" eventKey="1">
-              <Card.Header>Suggested Locations</Card.Header>
-            </Accordion.Toggle>
-            <Accordion.Collapse eventKey="1">
-              <SuggestionsTable
-                locationsData={this.state.locationsData}
-                handleCityClick={this.handleCityClick}
-              />
-            </Accordion.Collapse>
-          </Card>
-          <Card>
-            <Accordion.Toggle as={Button} variant="link" eventKey="2">
-              <Card.Header>Cuisines</Card.Header>
-            </Accordion.Toggle>
-            <Accordion.Collapse eventKey="2">
-              <Cuisines
-                selectedCity={this.state.selectedCity}
-                cuisineData={this.state.cuisineData}
-                onCuisineButtonClick={this.handleCuisineButtonClick}
-                onNextClick={this.getRestaurantDetails}
-              />
-            </Accordion.Collapse>
-          </Card>
-          <Card>
-            <Accordion.Toggle as={Button} variant="link" eventKey="3">
-              <Card.Header>Restaurants</Card.Header>
-            </Accordion.Toggle>
-            <Accordion.Collapse eventKey="3">
-              <RestaurantsTable restaurantsData={this.state.restaurantsData} />
-            </Accordion.Collapse>
-          </Card>
-        </Accordion>
-        <Button className="m-1" variant="danger" onClick={this.handleReset}>
-          Reset
-        </Button>
+        <Container>
+          <NavBar onReset={this.handleReset} />
+          <Accordion defaultActiveKey="0" activeKey={key}>
+            <Card>
+              <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                <Card.Header>Search</Card.Header>
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="0">
+                <Search
+                  onChange={this.handleChange}
+                  onSubmit={this.handleSubmit}
+                  getRestaurantDetails={this.props.getRestaurantDetails}
+                />
+              </Accordion.Collapse>
+            </Card>
+            <Card>
+              <Accordion.Toggle as={Button} variant="link" eventKey="1">
+                <Card.Header>Suggested Locations</Card.Header>
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="1">
+                <SuggestionsTable
+                  locationsData={this.state.locationsData}
+                  handleCityClick={this.handleCityClick}
+                />
+              </Accordion.Collapse>
+            </Card>
+            <Card>
+              <Accordion.Toggle as={Button} variant="link" eventKey="2">
+                <Card.Header>Cuisines</Card.Header>
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="2">
+                <Cuisines
+                  selectedCity={this.state.selectedCity}
+                  cuisineData={this.state.cuisineData}
+                  onCuisineButtonClick={this.handleCuisineButtonClick}
+                  onNextClick={this.getRestaurantDetails}
+                />
+              </Accordion.Collapse>
+            </Card>
+            <Card>
+              <Accordion.Toggle as={Button} variant="link" eventKey="3">
+                <Card.Header>Restaurants</Card.Header>
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="3">
+                <RestaurantsTable
+                  restaurantsData={this.state.restaurantsData}
+                />
+              </Accordion.Collapse>
+            </Card>
+          </Accordion>
+        </Container>
       </div>
     );
   }

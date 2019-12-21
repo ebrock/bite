@@ -3,6 +3,7 @@ import Card from "react-bootstrap/Card";
 import Accordion from "react-bootstrap/Accordion";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 
 class RestaurantsTable extends React.Component {
   render() {
@@ -23,11 +24,13 @@ class RestaurantsTable extends React.Component {
 
     //  Set the title. Previously null or "Location Suggestions".
     return (
-      <Row>
-        <Col>
-          <Accordion>{restaurants}</Accordion>
-        </Col>
-      </Row>
+      <Container>
+        <Row>
+          <Col>
+            <Accordion>{restaurants}</Accordion>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

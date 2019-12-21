@@ -1,11 +1,13 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
 
 class Search extends React.Component {
   render() {
     return (
       <div className="container">
-        <div id="city-search" className="row">
+        <div id="search" className="row">
           <div className="col">
             <form onSubmit={this.props.onSubmit}>
               <input
@@ -19,19 +21,12 @@ class Search extends React.Component {
                 required
               ></input>
               <Button
-                className="m-1"
-                variant="primary"
+                className="m-2"
+                variant="outline-primary"
                 type="submit"
                 city="Submit"
               >
                 Submit
-              </Button>
-              <Button
-                className="m-1"
-                variant="danger"
-                onClick={this.props.onReset}
-              >
-                Reset
               </Button>
             </form>
           </div>
