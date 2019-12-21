@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
 
 class Cuisines extends React.Component {
   render() {
@@ -34,10 +35,10 @@ class Cuisines extends React.Component {
       );
     }
     return (
-      <div>
+      <Container>
         {cuisines}
         {buttons}
-      </div>
+      </Container>
     );
   }
 }

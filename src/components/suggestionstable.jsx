@@ -1,7 +1,6 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 import Accordion from "react-bootstrap/Accordion";
 
 class SuggestionsTable extends React.Component {
@@ -21,13 +20,9 @@ class SuggestionsTable extends React.Component {
     }
 
     return (
-      <div>
-        <Row>
-          <Col>
-            <Accordion>{suggestions}</Accordion>
-          </Col>
-        </Row>
-      </div>
+      <Container>
+        <Accordion>{suggestions}</Accordion>
+      </Container>
     );
   }
 }

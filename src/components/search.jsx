@@ -6,8 +6,8 @@ import Container from "react-bootstrap/Container";
 class Search extends React.Component {
   render() {
     return (
-      <div className="container">
-        <div id="search" className="row">
+      <Container>
+        <Row>
           <div className="col">
             <form onSubmit={this.props.onSubmit}>
               <input
@@ -30,8 +30,8 @@ class Search extends React.Component {
               </Button>
             </form>
           </div>
-        </div>
-      </div>
+        </Row>
+      </Container>
     );
   }
 }
