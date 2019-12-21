@@ -178,7 +178,7 @@ class App extends React.Component {
                 onChange={this.handleChange}
                 onSubmit={this.handleSubmit}
                 onReset={this.handleReset}
-                getRestaurantDetails={this.getRestaurantDetails}
+                getRestaurantDetails={this.props.getRestaurantDetails}
               />
             </Accordion.Collapse>
           </Card>
