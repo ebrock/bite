@@ -1,4 +1,5 @@
 import React from "react";
+import Badge from "react-bootstrap/Badge";
 import Card from "react-bootstrap/Card";
 import Accordion from "react-bootstrap/Accordion";
 import Row from "react-bootstrap/Row";
@@ -6,6 +7,31 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 
 class RestaurantsTable extends React.Component {
+  setRatingBadge = (rating, text) => {
+    let badgeText;
+    if (text === "Not rated") {
+      badgeText = "Not rated";
+    } else {
+      badgeText = rating;
+    }
+    return badgeText;
+  };
+
+  getRatingColor = (rating, text) => {
+    let variant;
+    rating = parseFloat(rating);
+    if (rating >= 3.5) {
+      variant = "success";
+    } else if (rating >= 3) {
+      variant = "warning";
+    } else if (rating === 0 && text === "Not rated") {
+      variant = "info";
+    } else {
+      variant = "danger";
+    }
+    return variant;
+  };
+
   render() {
     return (
       <Container>
@@ -15,7 +41,21 @@ class RestaurantsTable extends React.Component {
               {this.props.restaurantsData.restaurants.map(r => (
                 <Card key={r.restaurant.id}>
                   <Accordion.Toggle as={Card.Header} eventKey={r.restaurant.id}>
-                    {r.restaurant.name} - <i>{r.restaurant.cuisines}</i>
+                    {r.restaurant.name} -{" "}
+                    <i>
+                      {r.restaurant.cuisines}{" "}
+                      <Badge
+                        variant={this.getRatingColor(
+                          r.restaurant.user_rating.aggregate_rating,
+                          r.restaurant.user_rating.rating_text
+                        )}
+                      >
+                        {this.setRatingBadge(
+                          r.restaurant.user_rating.aggregate_rating,
+                          r.restaurant.user_rating.rating_text
+                        )}
+                      </Badge>
+                    </i>
                   </Accordion.Toggle>
                   <Accordion.Collapse eventKey={r.restaurant.id}>
                     <Card.Body>{r.restaurant.location.address}</Card.Body>
