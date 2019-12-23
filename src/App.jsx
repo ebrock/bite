@@ -188,10 +188,14 @@ class App extends React.Component {
                 <Card.Header>Suggested Locations</Card.Header>
               </Accordion.Toggle>
               <Accordion.Collapse eventKey="1">
-                <SuggestionsTable
-                  locationsData={this.state.locationsData}
-                  handleCityClick={this.handleCityClick}
-                />
+                {this.state.locationsData ? (
+                  <SuggestionsTable
+                    locationsData={this.state.locationsData}
+                    handleCityClick={this.handleCityClick}
+                  />
+                ) : (
+                  <span></span>
+                )}
               </Accordion.Collapse>
             </Card>
             <Card>
@@ -199,12 +203,16 @@ class App extends React.Component {
                 <Card.Header>Cuisines</Card.Header>
               </Accordion.Toggle>
               <Accordion.Collapse eventKey="2">
-                <Cuisines
-                  selectedCity={this.state.selectedCity}
-                  cuisineData={this.state.cuisineData}
-                  onCuisineButtonClick={this.handleCuisineButtonClick}
-                  onNextClick={this.getRestaurantDetails}
-                />
+                {this.state.cuisineData ? (
+                  <Cuisines
+                    selectedCity={this.state.selectedCity}
+                    cuisineData={this.state.cuisineData}
+                    onCuisineButtonClick={this.handleCuisineButtonClick}
+                    onNextClick={this.getRestaurantDetails}
+                  />
+                ) : (
+                  <span></span>
+                )}
               </Accordion.Collapse>
             </Card>
             <Card>
@@ -212,9 +220,13 @@ class App extends React.Component {
                 <Card.Header>Restaurants</Card.Header>
               </Accordion.Toggle>
               <Accordion.Collapse eventKey="3">
-                <RestaurantsTable
-                  restaurantsData={this.state.restaurantsData}
-                />
+                {this.state.restaurantsData ? (
+                  <RestaurantsTable
+                    restaurantsData={this.state.restaurantsData}
+                  />
+                ) : (
+                  <span></span>
+                )}
               </Accordion.Collapse>
             </Card>
           </Accordion>
