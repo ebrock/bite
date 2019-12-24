@@ -70,7 +70,9 @@ class RestaurantsTable extends React.Component {
                               {r.restaurant.location.city}
                             </ListGroup.Item>
                             <ListGroup.Item>
-                              {r.restaurant.phone_numbers}
+                              <a href={"tel:" + r.restaurant.phone_numbers}>
+                                {r.restaurant.phone_numbers}
+                              </a>
                             </ListGroup.Item>
                           </React.Fragment>
                         </ListGroup>
