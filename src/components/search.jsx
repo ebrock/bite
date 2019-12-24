@@ -2,13 +2,14 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
+import "../App.scss";
 
 class Search extends React.Component {
   render() {
     return (
       <Container>
         <Row>
-          <div className="col">
+          <div id="search-form" className="col">
             <form onSubmit={this.props.onSubmit}>
               <input
                 type="text"
