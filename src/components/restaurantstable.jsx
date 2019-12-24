@@ -5,6 +5,7 @@ import Accordion from "react-bootstrap/Accordion";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import ListGroup from "react-bootstrap/ListGroup";
 
 class RestaurantsTable extends React.Component {
   setRatingBadge = (rating, text) => {
@@ -58,7 +59,23 @@ class RestaurantsTable extends React.Component {
                     </i>
                   </Accordion.Toggle>
                   <Accordion.Collapse eventKey={r.restaurant.id}>
-                    <Card.Body>{r.restaurant.location.address}</Card.Body>
+                    <Card.Body>
+                      <div>
+                        <ListGroup>
+                          <React.Fragment>
+                            <ListGroup.Item>
+                              {r.restaurant.location.address}
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                              {r.restaurant.location.city}
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                              {r.restaurant.phone_numbers}
+                            </ListGroup.Item>
+                          </React.Fragment>
+                        </ListGroup>
+                      </div>
+                    </Card.Body>
                   </Accordion.Collapse>
                 </Card>
               ))}
