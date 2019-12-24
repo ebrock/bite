@@ -64,6 +64,14 @@ class RestaurantsTable extends React.Component {
                         <ListGroup>
                           <React.Fragment>
                             <ListGroup.Item>
+                              {r.restaurant.timings}
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                              <a href={r.restaurant.url} target="_blank">
+                                <b>{r.restaurant.name}</b> on Zomato
+                              </a>
+                            </ListGroup.Item>
+                            <ListGroup.Item>
                               {r.restaurant.location.address}
                             </ListGroup.Item>
                             <ListGroup.Item>
