@@ -9,7 +9,9 @@
 3. Select cuisines.
 4. Tap or click a result to get information.
 
-The app has some limitations in its current state. For example, sometimes results are returned from out-of-town locations since the API calls do not limit search results by distance. The API also relies on user input for reviews, so restaurants with low volume may not have properly reflected ratings. There are some clear out-of-the-box issues that I am looking forward to tackling.
+## Limitations
+
+For example, sometimes results are returned from out-of-town locations since the API calls do not limit search results by distance. The API also relies on user input for reviews, so restaurants with low volume may not have properly reflected ratings.
 
 ## Roadmap
 
